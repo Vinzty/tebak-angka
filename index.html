@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebak Angka</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      text-align: center;
+      max-width: 300px;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tebak Angka</h1>
+    <p>Masukkan nama Anda:</p>
+    <input type="text" id="playerName" placeholder="Nama Anda" />
+    <p>Tebak sebuah angka antara 1 dan 100:</p>
+    <input type="number" id="guess" min="1" max="100" />
+    <button onclick="checkGuess()">Tebak</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    let angkaRahasia = Math.floor(Math.random() * 100) + 1;
+
+    function checkGuess() {
+      const playerName = document.getElementById("playerName").value;
+      const tebakan = parseInt(document.getElementById("guess").value);
+      const message = document.getElementById("message");
+
+      if (!playerName) {
+        message.innerHTML = "Masukkan nama Anda terlebih dahulu!";
+        return;
+      }
+
+      if (isNaN(tebakan)) {
+        message.innerHTML = `${playerName}, masukkan angka yang valid!`;
+        return;
+      }
+
+      if (tebakan < angkaRahasia) {
+        message.innerHTML = `${playerName}, terlalu kecil!`;
+      } else if (tebakan > angkaRahasia) {
+        message.innerHTML = `${playerName}, terlalu besar!`;
+      } else {
+        message.innerHTML = `Selamat, ${playerName}! Anda menebak angka yang benar: ${angkaRahasia}`;
+      }
+    }
+  </script>
+</body>
+</html>
